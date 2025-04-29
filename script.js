@@ -128,14 +128,20 @@ function toggleCompletada(id) {
 
 // Eliminar tarea
 function eliminarTarea(id) {
-  const index = tareas.findIndex((t) => t.id === id);
-  if (index !== -1) {
-    const eliminada = tareas.splice(index, 1)[0];
-    undoStack.push(["delete", eliminada]);
-    redoStack = [];
-    renderTasks(filtroActual);
+    const index = tareas.findIndex((t) => t.id === id);
+    if (index !== -1) {
+      const li = document.querySelector(`li[data-id="${id}"]`);
+      li.classList.add("fade-out");
+  
+      li.addEventListener("animationend", () => {
+        const eliminada = tareas.splice(index, 1)[0];
+        undoStack.push(["delete", eliminada]);
+        redoStack = [];
+        renderTasks(filtroActual);
+      });
+    }
   }
-}
+  
 
 // Editar tarea
 function editarTarea(li, id) {
@@ -311,6 +317,52 @@ function updateUndoRedoButtons() {
   undoBtn.disabled = undoStack.length === 0;
   redoBtn.disabled = redoStack.length === 0;
 }
+
+// Exportar tareas a CSV
+
+document.getElementById("export-csv").addEventListener("click", () => {
+    if (tareas.length === 0) {
+      alert("No hay tareas para exportar.");
+      return;
+    }
+  
+    const encabezados = ["Texto", "Fecha", "Prioridad", "Completada"];
+    const filas = tareas.map((t) =>
+      [t.texto, t.fecha, t.prioridad, t.completada ? "Sí" : "No"].join(",")
+    );
+  
+    const contenido = [encabezados.join(","), ...filas].join("\n");
+    const blob = new Blob([contenido], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+  
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "tareas.csv";
+    a.click();
+  
+    URL.revokeObjectURL(url);
+  });
+
+  //Alerta de tareas por vencer
+  function verificarTareasProximas() {
+    const ahora = new Date();
+    const en24h = new Date(ahora.getTime() + 24 * 60 * 60 * 1000);
+  
+    const proximas = tareas.filter((t) => {
+      const fechaTarea = new Date(t.fecha);
+      return !t.completada && fechaTarea >= ahora && fechaTarea <= en24h;
+    });
+  
+    if (proximas.length > 0) {
+      const nombres = proximas.map((t) => `- ${t.texto} (${t.fecha})`).join("\n");
+      alert(`Tareas próximas a vencer:\n\n${nombres}`);
+    }
+  }
+  
+  // Revisa cada minuto si hay tareas próximas a vencer
+  setInterval(verificarTareasProximas, 60 * 1000);
+  
+  
 
 // Carga inicial
 renderTasks();
