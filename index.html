@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Mis Tareas</h1>
+        <button class="button" id="theme-toggle">🌓 Cambiar Tema</button>
+      </header>
+
+      <form id="task-form">
+        <input
+          type="text"
+          id="task-text"
+          placeholder="Nueva tarea..."
+          required
+        />
+        <div class="task-form-options">
+          <input type="date" id="task-date" required />
+          <select id="task-priority">
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+        <div class="form-submit">
+          <button type="submit">Añadir tarea</button>
+        </div>
+      </form>
+
+      <div class="filters">
+        <div>
+          <button class="button" data-filter="todas">Todas</button>
+          <button class="button" data-filter="completadas">Completadas</button>
+          <button class="button" data-filter="pendientes">Pendientes</button>
+        </div>
+        <div>
+          <button id="undo-btn" disabled>Deshacer</button>
+          <button id="redo-btn" disabled>Rehacer</button>
+        </div>
+      </div>
+      <span class="task-counter" id="task-counter">0 tareas pendientes</span>
+
+      <ul id="task-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

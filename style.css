@@ -1,0 +1,233 @@
+:root {
+  --primary: #4caf50;
+  --background: #ffffff;
+  --text: #333333;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.button {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+input,
+select {
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+form input,
+form select {
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  flex: 1;
+}
+
+form button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  width: fit-content;
+  background-color: var(--primary);
+  color: #fff;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+.form-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 0 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.task-counter {
+  font-size: 14px;
+  color: #666;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+.task-order {
+  display: flex;
+}
+.checkbox {
+  margin-right: 16px;
+}
+.task-form-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-direction: row;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f4f4f4;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.task-item.completed {
+  background-color: #d4edda;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.task-actions button {
+  background-color: #ffffff !important;
+  border: 1px solid #333333;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-item.completed .task-actions button {
+  text-decoration: none; /* Asegura que los botones no estén subrayados */
+}
+
+.drag-over {
+  border: 2px dashed #4caf50;
+}
+
+.task-priority-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  color: white;
+  margin-right: 16px;
+  text-align: center;
+}
+
+.priority-alta {
+  background-color: red;
+  color: white;
+  width: 40px;
+}
+
+.priority-media {
+  background-color: orange;
+  color: white;
+}
+
+.priority-baja {
+  background-color: green;
+  color: white;
+}
+
+.undo-redo-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.undo-redo-buttons button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .task-form-options {
+    flex-direction: column;
+  }
+}
+
+/* Tema oscuro */
+body.dark-theme {
+  background-color: #333333;
+  color: #eee;
+}
+
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme button {
+  background-color: #333;
+  color: #eee;
+  border-color: #afafaf;
+}
+body.dark-theme .task-text {
+  color: #333; /* O el color que prefieras */
+}
+body.dark-theme .task-counter {
+  color: #cccccc;
+}
+
+body.dark-theme form button {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+body.dark-theme form button:hover {
+    background-color: #45a049;
+  }
